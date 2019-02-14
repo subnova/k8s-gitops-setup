@@ -96,7 +96,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3030    # informational
-              volumeMounts:
+          volumeMounts:
             - name: git-key
               mountPath: /etc/fluxd/ssh    # to match location given in image's /etc/ssh/config
               readOnly: true    # this will be the case perforce in K8s >=1.10
