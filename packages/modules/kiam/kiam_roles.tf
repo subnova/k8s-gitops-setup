@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "kiam_assume" {
     principals {
       type        = "AWS"
       identifiers = [
-        "${aws_iam_role.kiam.arn}"
+        "${var.kiam_role_arn}"
       ]
     }
   }

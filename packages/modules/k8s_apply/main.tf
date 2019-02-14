@@ -1,14 +1,10 @@
-data "local_file" "manifest" {
-    filename = "${var.path}"
-}
-
 resource "null_resource" "exec" {    
     triggers {
-        manifest = "${data.local_file.manifest.content}"
+        manifest = "${var.hash}"
     }
 
     provisioner "local-exec" {
-        command = "kubectl apply -f ${var.path}"
+        command = "cat ${var.path} | kubectl apply -f-"
 
         environment {
             KUBECONFIG = "${var.kubeconfig_file}"

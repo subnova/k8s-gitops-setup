@@ -53,3 +53,11 @@ module "flux" {
 
     kubeconfig_file = "${module.eks.kubeconfig_file}"
 }
+
+module "kiam" {
+    source = "../modules/kiam"
+
+    environment = "${var.environment}"
+    kubeconfig_file = "${module.eks.kubeconfig_file}"
+    kiam_role_arn = "${module.eks.kiam_role_arn}"
+}

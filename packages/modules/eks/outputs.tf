@@ -32,3 +32,8 @@ output "worker_security_group_id" {
   description = "The worker security group id"
   value = "${module.eks.worker_security_group_id}"
 }
+
+output "kiam_role_arn" {
+  description = "The ARN of the role created for the KIAM servers"
+  value = "${aws_iam_role.kiam.arn}"
+}
