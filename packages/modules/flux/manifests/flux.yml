@@ -128,8 +128,8 @@ spec:
             # reduced --registry-rps from 200 to 10
             # stretched registry poll interval to 10h as it's (a) broken and (b) not needed
             - --git-poll-interval=1m
-            - --sync-interval=5m
-            - --registry-poll-interval=600m
+            - --sync-interval=2m
+            - --registry-poll-interval=20m
             - --registry-rps=10
 
             # include these next two to connect to an "upstream" service
