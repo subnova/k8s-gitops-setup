@@ -52,6 +52,17 @@ resource "aws_iam_role_policy" "kiam_external_dns" {
 EOF
 }
 
+# Flux
+resource "aws_iam_role" "flux" {
+  name = "flux-${var.environment}"
+  assume_role_policy = "${data.aws_iam_policy_document.kiam_assume.json}"
+}
+
+resource "aws_iam_role_policy_attachment" "flux" {
+  role = "${aws_iam_role.flux.name}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
 # Cert Manager
 resource "aws_iam_role" "cert_manager" {
   name = "cert-manager-${var.environment}"

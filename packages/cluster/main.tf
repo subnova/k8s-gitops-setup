@@ -48,6 +48,12 @@ module "eks" {
     config_output_path = "/tmp/"
 }
 
+module "kubesystem" {
+    source = "../modules/kube_system"
+
+    kubeconfig_file = "${module.eks.kubeconfig_file}"
+}
+
 module "flux" {
     source = "../modules/flux"
 

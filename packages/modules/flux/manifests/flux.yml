@@ -64,6 +64,8 @@ spec:
     metadata:
       labels:
         app: flux
+      annotations:
+        iam.amazonaws.com/role: flux-dev
     spec:
       serviceAccount: flux
       volumes:
