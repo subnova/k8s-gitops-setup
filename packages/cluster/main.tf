@@ -18,10 +18,14 @@ module "vpc" {
 
   public_subnet_tags = {
     Name = "${var.environment}-public"
+    "kubernetes.io/role/elb" = "1"
+    SubnetType = "Utility"
   }
 
   private_subnet_tags = {
     Name = "${var.environment}-private"
+    "kubernetes.io/role/internal-elb" = "1"
+    SubnetType = "Private"
   }
 
   enable_nat_gateway     = true
@@ -34,6 +38,7 @@ module "vpc" {
   tags = {
     Environment = "${var.environment}"
     Component   = "cluster"
+    "kubernetes.io/cluster/gitops-${var.environment}" = "shared"
   }
 }
 
