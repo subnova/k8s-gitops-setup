@@ -96,29 +96,32 @@ resource "aws_iam_role_policy" "cert_manager" {
 EOF
 } 
 
-# SQS Operator
-resource "aws_iam_role" "sqs_operator" {
-  name = "sqs-operator-${var.environment}"
+# Service Operator
+resource "aws_iam_role" "service_operator" {
+  name = "service-operator-${var.environment}"
   assume_role_policy = "${data.aws_iam_policy_document.kiam_assume.json}"
 }
 
-resource "aws_iam_role_policy" "sqs_operator" {
-  role = "${aws_iam_role.sqs_operator.name}"
-
+resource "aws_iam_role_policy" "service_operator" {
+  role = "${aws_iam_role.service_operator.name}"
   policy = <<EOF
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "sqs:*"
-            ],
-            "Resource": [
-                "*"
-            ]
-        }
-    ]
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "sqs:*",
+                    "sns:*",
+                    "cloudformation:*",
+                    "ecr:*",
+                    "dynamodb:*",
+                    "s3:*",
+                    "elasticache:*"
+                  ],
+                  "Resource": "*"
+                }
+              ]
 }
 EOF
 } 
