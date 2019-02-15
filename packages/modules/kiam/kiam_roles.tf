@@ -96,3 +96,29 @@ resource "aws_iam_role_policy" "cert_manager" {
 EOF
 } 
 
+# SQS Operator
+resource "aws_iam_role" "sqs_operator" {
+  name = "sqs-operator-${var.environment}"
+  assume_role_policy = "${data.aws_iam_policy_document.kiam_assume.json}"
+}
+
+resource "aws_iam_role_policy" "sqs_operator" {
+  role = "${aws_iam_role.sqs_operator.name}"
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+EOF
+} 
